@@ -72,7 +72,7 @@ int main()
     // Evitando problemas com clicks indevidos
     ShowCursor(FALSE);
 
-    // Devido a compra de ingresso estar sempre disponivel, não será necessario o script terminar. Por isso ficará em looping infinito
+    // Devido a compra de ingressoS estar sempre disponivel, não será necessario o script terminar. Por isso ficará em looping infinito
     while (1 != 0)
     {
 
