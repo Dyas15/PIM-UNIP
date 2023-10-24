@@ -13,10 +13,11 @@
 #define meia 15.00
 
 // Declara as variaveis tipo para a escolha do ingresso
-// E quant para a quantidade de ingressos
-int tipo, quant, escolha, tema, cont, lgpd;
+// E quantidade para a quantidade de ingressos
+int tipo, quant, escolha, tema, cont, lgpd, idade;
 bool tema1, tema2, tema3, tema4;
 char nome, cpf[11];
+FILE *arquivo = fopen("registro_museu.csv", "w");
 
 // Função assincrona que se acionada, executa o comando para limpar tela
 void limparTela()
@@ -110,7 +111,7 @@ int verificarCPF(char *cpf)
     {
         // Caso o resto da divisão seja maior que 1, então é feito a conta da quantidade de numeros em um cpf
         // menos o resultado do resto da divisão
-        // Nesse exemplo, resultando em 5, que está correto
+        // Nesse exemplo, resultando em 3, que está correto
 
         verificador2 = 11 - verificador2;
     }
@@ -150,10 +151,10 @@ int main()
     // Evitando problemas com clicks indevidos
     ShowCursor(FALSE);
 
-    // Devido a compra de ingressoS estar sempre disponivel, não será necessario o script terminar. Por isso ficará em looping infinito
-    while (1 != 0)
+    // Devido a compra de ingressos estar sempre disponivel, não será necessario o script terminar. Por isso ficará em looping infinito
+    while (1)
     {
-
+        limparTela();
         // LGDP
         wprintf(L"Prezado(a) usuário(a),\nRespeitamos a sua privacidade e estamos comprometidos em proteger os seus dados pessoais.\n\n");
         wprintf(L"De acordo com a Lei Geral de Proteção de Dados (LGPD), precisamos da sua autorização para coletar, armazenar e utilizar as suas informações pessoais.\n\n");
@@ -188,7 +189,7 @@ int main()
                 }
                 else
                 {
-                    // Auto-explicativo
+                    // Limpa a tela
                     limparTela();
                     wprintf(L"CPF Inválido!");
                     // Espera por 3 segundos
@@ -197,96 +198,129 @@ int main()
                     limparTela();
                 }
                 // O loop é infinito até a pessoa colocar o CPF corretamente
-            } while (1 != 0);
+            } while (1);
 
             // Auto-explicativo
             limparTela();
 
-            printf("Escolha seu ingresso:\n");
-            printf("1) Inteiro\n");
-            printf("2) Meio\n");
-            printf("3) Isento\n\n");
-            printf("Digite o tipo de ingresso: ");
-            scanf("%d", &tipo);
-            if (tipo != 1 && tipo != 2 && tipo != 3)
+            do
             {
-                limparTela();
-                wprintf(L"Opção inexistente!\n");
-                // Faz esperar por 1 segundo
-                Sleep(1000);
-                limparTela();
-            }
-            else
+                printf("Digite sua idade: ");
+                scanf("%d", &idade);
+
+                if ((idade < 0) || (idade > 100))
+                {
+                    wprintf(L"Idade inválida!\n");
+                }
+                else
+                {
+                    break;
+                }
+            } while (1);
+
+            // Auto-explicativo
+            limparTela();
+
+            tipo = 0;
+
+            if (idade < 60)
             {
-                limparTela();
-                printf("Temas\n\n");
-                printf("1)100 anos da semana de arte moderna\n");
-                printf("2)150 anos de Santos Dumont\n");
-                wprintf(L"3)Jogos olímpicos de París 2024\n");
-                wprintf(L"4)Arte Periférica\n");
                 do
                 {
-                    wprintf(L"\nDigite qual tema você irá ver: ");
-                    scanf("%d", &tema);
-                    if (tema != 1 and tema != 2 and tema != 3 and tema != 4)
+                    printf("Escolha seu ingresso:\n");
+                    printf("1) Inteiro\n");
+                    printf("2) Meio\n");
+                    printf("3) Isento\n\n");
+                    printf("Digite o tipo de ingresso: ");
+                    scanf("%d", &tipo);
+                    if (tipo != 1 && tipo != 2 && tipo != 3)
                     {
+                        limparTela();
                         wprintf(L"Opção inexistente!\n");
                         // Faz esperar por 1 segundo
                         Sleep(1000);
-                        // Limpa a tela
                         limparTela();
-                        escolha = 1;
                     }
-                    else
+                } while (tipo != 1 && tipo != 2 && tipo != 3);
+            }
+            limparTela();
+            printf("Temas\n\n");
+            printf("1)100 anos da semana de arte moderna\n");
+            printf("2)150 anos de Santos Dumont\n");
+            wprintf(L"3)Jogos olímpicos de París 2024\n");
+            wprintf(L"4)Arte Periférica\n");
+            do
+            {
+                // Auto-explicativo
+                wprintf(L"\nDigite qual tema você irá ver: \n");
+                scanf("%d", &tema);
+                if (tema != 1 and tema != 2 and tema != 3 and tema != 4)
+                {
+                    wprintf(L"Opção inexistente!\n");
+                    // Faz esperar por 1 segundo
+                    Sleep(1000);
+                    // Limpa a tela
+                    limparTela();
+                    escolha = 1;
+                }
+                else if ((tema == 1 && tema1 == 1) || (tema == 2 && tema2 == 1) || (tema == 3 && tema3 == 1) || (tema == 4 && tema4 == 1))
+                {
+                    // Auto-explicativo
+                    limparTela();
+                    printf("Tema repetido!\nPor favor, escolha outro tema!\n");
+                    Sleep(3500);
+                    limparTela();
+                }
+                else
+                {
+                    cont++;
+                    switch (tema)
                     {
-                        cont++;
-                        switch (tema)
-                        {
-                        case 1:
-                            tema1 = true;
-                            break;
-                        case 2:
-                            tema2 = true;
-                            break;
-                        case 3:
-                            tema3 = true;
-                            break;
-                        case 4:
-                            tema4 = true;
-                            break;
-                        }
-                        wprintf(L"\nDeseja escolhar mais outro tema?\n1)Sim\n2)Não\n");
-                        scanf("%d", &escolha);
+                    case 1:
+                        tema1 = 1;
+                        break;
+                    case 2:
+                        tema2 = 1;
+                        break;
+                    case 3:
+                        tema3 = 1;
+                        break;
+                    case 4:
+                        tema4 = 1;
+                        break;
                     }
-                } while (escolha != 2);
-                // Limpa a tela
-                limparTela();
+                    wprintf(L"\nDeseja escolhar mais outro tema?\n1)Sim\n2)Não\n");
+                    scanf("%d", &escolha);
+                }
+            } while (escolha != 2);
+            // Limpa a tela
+            limparTela();
 
-                printf("Digite a quantidade de ingressos desejados: ");
-                scanf("%d", &quant);
+            printf("Digite a quantidade de ingressos desejados: ");
+            scanf("%d", &quant);
 
-                if (tipo == 1)
-                {
-                    wprintf(L"Você escolheu o ingresso com valor inteiro!\n");
-                    printf("O total de %d ingressos com valores inteiros com %d tema(s) ficou: R$%.2f\n", quant, cont, (inteira * cont * quant));
-                    system("pause");
-                    exit(0);
-                }
-                else if (tipo == 2)
-                {
-                    wprintf(L"Você escolheu o ingresso com meio valor!\n");
-                    Sleep(2800);
-                    limparTela();
-                    exit(0);
-                }
-                else if (tipo == 3)
-                {
-                    wprintf(L"Você escolheu o ingresso isento!\n");
-                    // Faz esperar por 2 segundos e 800 milesimos
-                    Sleep(2800);
-                    limparTela();
-                    exit(0);
-                }
+            limparTela();
+
+            // fprintf(file, '%s;%s;');
+
+            if (tipo == 1 && idade <= 60)
+            {
+                wprintf(L"Você escolheu o ingresso com valor inteiro!\n");
+                printf("O total de %d ingressos com valores inteiros com %d tema(s) ficou: R$%.2f\n", quant, cont, (inteira * cont * quant));
+                Sleep(3500);
+            }
+            else if (tipo == 2 && idade <= 60)
+            {
+                wprintf(L"Você escolheu o ingresso com meio valor!\n");
+                printf("O total de %d ingressos com metade do valor com %d tema(s) ficou: R$%.2f\n", quant, cont, (meia * cont * quant));
+                wprintf(L"Apresente seu documento no caixa para validar seu ingresso\n");
+                Sleep(3500);
+            }
+            else if (idade >= 60)
+            {
+                wprintf(L"Você escolheu o ingresso isento!\n");
+                wprintf(L"Vá ao caixa e apresente seu RG para validar sua isenção!");
+                Sleep(3500);
             }
         }
         else
