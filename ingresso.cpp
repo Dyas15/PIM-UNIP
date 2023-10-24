@@ -9,15 +9,15 @@
 
 // Define o valor dos ingressos como constantes
 // Não necessario definir o valor do ingresso de Isento pois é 0
-#define inteira 30.00
-#define meia 15.00
+#define inteira 30
+#define meia 15
 
 // Declara as variaveis tipo para a escolha do ingresso
 // E quantidade para a quantidade de ingressos
-int tipo, quant, escolha, tema, cont, lgpd, idade;
+int tipo, quant, escolha, tema, cont, lgpd, idade, valor;
 bool tema1, tema2, tema3, tema4;
-char nome, cpf[11];
-FILE *arquivo = fopen("registro_museu.csv", "w");
+char nome[30], cpf[11];
+FILE *arquivo;
 
 // Função assincrona que se acionada, executa o comando para limpar tela
 void limparTela()
@@ -170,7 +170,7 @@ int main()
             wprintf(L"---------Museu São SLA---------\n");
             printf("         Seja bem-vindo!\n\n");
             printf("Digite seu nome: ");
-            scanf("%s", &nome);
+            scanf("%s", &*nome);
 
             // Irá ficar repetindo até a pessoa colocar um CPF valido
             do
@@ -301,18 +301,18 @@ int main()
 
             limparTela();
 
-            // fprintf(file, '%s;%s;');
-
             if (tipo == 1 && idade <= 60)
             {
                 wprintf(L"Você escolheu o ingresso com valor inteiro!\n");
-                printf("O total de %d ingressos com valores inteiros com %d tema(s) ficou: R$%.2f\n", quant, cont, (inteira * cont * quant));
+                valor = inteira * cont * quant;
+                printf("O total de %d ingressos com valores inteiros com %d tema(s) ficou: R$%d\n", quant, cont, valor);
                 Sleep(3500);
             }
             else if (tipo == 2 && idade <= 60)
             {
                 wprintf(L"Você escolheu o ingresso com meio valor!\n");
-                printf("O total de %d ingressos com metade do valor com %d tema(s) ficou: R$%.2f\n", quant, cont, (meia * cont * quant));
+                valor = meia * cont * quant;
+                printf("O total de %d ingressos com metade do valor com %d tema(s) ficou: R$%d\n", quant, cont, valor);
                 wprintf(L"Apresente seu documento no caixa para validar seu ingresso\n");
                 Sleep(3500);
             }
@@ -322,6 +322,10 @@ int main()
                 wprintf(L"Vá ao caixa e apresente seu RG para validar sua isenção!");
                 Sleep(3500);
             }
+
+            arquivo = fopen("registro_museu.csv", "w");
+            fprintf(arquivo, "%s;%s;%d;%d;%d;%d;%d;%d;%d;%d\n", nome, cpf, idade, tipo, tema1, tema2, tema3, tema4, quant, valor);
+            fclose(arquivo);
         }
         else
         {
