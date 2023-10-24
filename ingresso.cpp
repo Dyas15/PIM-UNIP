@@ -210,7 +210,7 @@ int main()
                 printf("Digite sua idade: ");
                 scanf("%d", &idade);
 
-                if ((idade < 0) || (idade > 100))
+                if ((idade <1) || (idade > 99))
                 {
                     wprintf(L"Idade inválida!\n");
                 }
@@ -245,52 +245,62 @@ int main()
                     }
                 } while (tipo != 1 && tipo != 2 && tipo != 3);
             }
-            limparTela();
-            printf("Temas\n\n");
-            printf("1)100 anos da semana de arte moderna\n");
-            printf("2)150 anos de Santos Dumont\n");
-            wprintf(L"3)Jogos olímpicos de París 2024\n");
-            wprintf(L"4)Arte Periférica\n");
             do
             {
-                // Auto-explicativo
-                wprintf(L"\nDigite qual tema você irá ver: \n");
-                scanf("%d", &tema);
-                if (tema < 1 || tema > 4)
-                {
-                    wprintf(L"Opção inexistente!\n");
-                    // Faz esperar por 1 segundo
-                    Sleep(1000);
-                    // Limpa a tela
-                    limparTela();
-                    escolha = 1;
-                }
-                else if ((tema == 1 && tema1 == 1) || (tema == 2 && tema2 == 1) || (tema == 3 && tema3 == 1) || (tema == 4 && tema4 == 1))
+                if (tema1 != 1 || tema2 != 1 || tema3 != 1 || tema4 != 1)
                 {
                     // Auto-explicativo
                     limparTela();
-                    printf("Tema repetido!\nPor favor, escolha outro tema!\n");
-                    Sleep(3500);
-                    limparTela();
+                    printf("Temas\n\n");
+                    printf("1)100 anos da semana de arte moderna\n");
+                    printf("2)150 anos de Santos Dumont\n");
+                    wprintf(L"3)Jogos olímpicos de París 2024\n");
+                    wprintf(L"4)Arte Periférica\n");
+                    wprintf(L"\nDigite qual tema você irá ver: \n");
+                    scanf("%d", &tema);
+                    if (tema < 1 || tema > 4)
+                    {
+                        wprintf(L"Opção inexistente!\n");
+                        // Faz esperar por 1 segundo
+                        Sleep(1000);
+                        // Limpa a tela
+                        limparTela();
+                        escolha = 1;
+                    }
+                    else if ((tema == 1 && tema1 == 1) || (tema == 2 && tema2 == 1) || (tema == 3 && tema3 == 1) || (tema == 4 && tema4 == 1))
+                    {
+                        // Auto-explicativo
+                        limparTela();
+                        printf("Tema repetido!\nPor favor, escolha outro tema!\n");
+                        Sleep(3500);
+                        limparTela();
+                    }
+                    else
+                    {
+                        cont++;
+                        switch (tema)
+                        {
+                        case 1:
+                            tema1 = 1;
+                            break;
+                        case 2:
+                            tema2 = 1;
+                            break;
+                        case 3:
+                            tema3 = 1;
+                            break;
+                        case 4:
+                            tema4 = 1;
+                            break;
+                        }
+                    }
                 }
                 else
                 {
-                    cont++;
-                    switch (tema)
-                    {
-                    case 1:
-                        tema1 = 1;
-                        break;
-                    case 2:
-                        tema2 = 1;
-                        break;
-                    case 3:
-                        tema3 = 1;
-                        break;
-                    case 4:
-                        tema4 = 1;
-                        break;
-                    }
+                    break;
+                }
+                if (tema1 != 1 || tema2 != 1 || tema3 != 1 || tema4 != 1)
+                {
                     wprintf(L"\nDeseja escolhar mais outro tema?\n1)Sim\n2)Não\n");
                     scanf("%d", &escolha);
                 }
