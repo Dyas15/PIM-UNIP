@@ -12,13 +12,6 @@
 #define inteira 30
 #define meia 15
 
-// Declara as variaveis tipo para a escolha do ingresso
-// E quantidade para a quantidade de ingressos
-int tipo, quant, escolha, tema, cont, lgpd, idade, valor;
-bool tema1, tema2, tema3, tema4;
-char nome[30], cpf[11];
-FILE *arquivo;
-
 // Função assincrona que se acionada, executa o comando para limpar tela
 void limparTela()
 {
@@ -129,6 +122,7 @@ int verificarCPF(char *cpf)
 // Inicio
 int main()
 {
+    FILE *arquivo;
 
     // A função keybd_event serve para simular pressionamento de teclas no console
     // Esse conjunto de teclas serve para deixar o console em tela cheia
@@ -154,6 +148,12 @@ int main()
     // Devido a compra de ingressos estar sempre disponivel, não será necessario o script terminar. Por isso ficará em looping infinito
     while (1)
     {
+        // Declara as variaveis tipo para a escolha do ingresso
+        // E quantidade para a quantidade de ingressos
+        int tipo = 0, quant = 0, escolha = 0, tema = 0, cont = 0, idade = 0, valor = 0;
+        bool tema1 = 0, tema2 = 0, tema3 = 0, tema4 = 0;
+        char nome[60] = "", cpf[11] = "";
+
         limparTela();
         // LGDP
         wprintf(L"Prezado(a) usuário(a),\nRespeitamos a sua privacidade e estamos comprometidos em proteger os seus dados pessoais.\n\n");
@@ -170,7 +170,9 @@ int main()
             wprintf(L"---------Museu São SLA---------\n");
             printf("         Seja bem-vindo!\n\n");
             printf("Digite seu nome: ");
-            scanf("%s", &*nome);
+            scanf(" %99[^\n]", &*nome);
+
+            limparTela();
 
             // Irá ficar repetindo até a pessoa colocar um CPF valido
             do
@@ -254,7 +256,7 @@ int main()
                 // Auto-explicativo
                 wprintf(L"\nDigite qual tema você irá ver: \n");
                 scanf("%d", &tema);
-                if (tema != 1 and tema != 2 and tema != 3 and tema != 4)
+                if (tema < 1 || tema > 4)
                 {
                     wprintf(L"Opção inexistente!\n");
                     // Faz esperar por 1 segundo
@@ -305,25 +307,25 @@ int main()
             {
                 wprintf(L"Você escolheu o ingresso com valor inteiro!\n");
                 valor = inteira * cont * quant;
-                printf("O total de %d ingressos com valores inteiros com %d tema(s) ficou: R$%d\n", quant, cont, valor);
+                printf("O total de %d ingresso(s) com valores inteiros com %d tema(s) ficou: R$%d\n", quant, cont, valor);
                 Sleep(3500);
             }
             else if (tipo == 2 && idade <= 60)
             {
                 wprintf(L"Você escolheu o ingresso com meio valor!\n");
                 valor = meia * cont * quant;
-                printf("O total de %d ingressos com metade do valor com %d tema(s) ficou: R$%d\n", quant, cont, valor);
+                printf("O total de %d ingresso(s) com metade do valor com %d tema(s) ficou: R$%d\n", quant, cont, valor);
                 wprintf(L"Apresente seu documento no caixa para validar seu ingresso\n");
                 Sleep(3500);
             }
-            else if (idade >= 60)
+            else
             {
                 wprintf(L"Você escolheu o ingresso isento!\n");
                 wprintf(L"Vá ao caixa e apresente seu RG para validar sua isenção!");
                 Sleep(3500);
             }
 
-            arquivo = fopen("registro_museu.csv", "w");
+            arquivo = fopen("registro_museu.csv", "a");
             fprintf(arquivo, "%s;%s;%d;%d;%d;%d;%d;%d;%d;%d\n", nome, cpf, idade, tipo, tema1, tema2, tema3, tema4, quant, valor);
             fclose(arquivo);
         }
