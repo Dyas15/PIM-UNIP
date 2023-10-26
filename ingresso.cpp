@@ -308,7 +308,7 @@ int main()
             // Limpa a tela
             limparTela();
 
-            printf("Digite a quantidade de ingressos desejados: ");
+            printf("Digite a quantidade de ingressos desejados para cada tema: ");
             scanf("%d", &quant);
 
             limparTela();
@@ -318,7 +318,7 @@ int main()
                 wprintf(L"Você escolheu o ingresso com valor inteiro!\n");
                 valor = inteira * cont * quant;
                 printf("O total de %d ingresso(s) com valores inteiros com %d tema(s) ficou: R$%d\n", quant, cont, valor);
-                Sleep(3500);
+                Sleep(7000);
             }
             else if (tipo == 2 && idade <= 60)
             {
@@ -326,13 +326,13 @@ int main()
                 valor = meia * cont * quant;
                 printf("O total de %d ingresso(s) com metade do valor com %d tema(s) ficou: R$%d\n", quant, cont, valor);
                 wprintf(L"Apresente seu documento no caixa para validar seu ingresso\n");
-                Sleep(3500);
+                Sleep(7000);
             }
             else
             {
                 wprintf(L"Você escolheu o ingresso isento!\n");
                 wprintf(L"Vá ao caixa e apresente seu RG para validar sua isenção!");
-                Sleep(3500);
+                Sleep(7000);
             }
 
             arquivo = fopen("registro_museu.csv", "a");
