@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <wchar.h>
 #include <windows.h>
-#include <winuser.h>
 
 // Define o valor dos ingressos como constantes
 // Não necessario definir o valor do ingresso de Isento pois é 0
@@ -17,6 +16,12 @@ void limparTela()
 {
     // Envia o comando para limpar o terminal
     system("cls");
+}
+
+void cabecalho()
+{
+    printf("---------Museu DevWorld---------\n");
+    printf("         Seja bem-vindo!\n\n");
 }
 
 // Função para verificar o CPF
@@ -124,17 +129,6 @@ int main()
 {
     FILE *arquivo;
 
-    // A função keybd_event serve para simular pressionamento de teclas no console
-    // Esse conjunto de teclas serve para deixar o console em tela cheia
-    // Simula o pressionamento da tecla ALT
-    keybd_event(VK_MENU, 0x36, 0, 0);
-    // Simula o pressionamento da tecla ENTER
-    keybd_event(VK_RETURN, 0x1C, 0, 0);
-    // Simula a liberação da tecla ENTER
-    keybd_event(VK_RETURN, 0x1C, KEYEVENTF_KEYUP, 0);
-    // Simula a liberação da tela ALT
-    keybd_event(VK_MENU, 0x38, KEYEVENTF_KEYUP, 0);
-
     // A função setLocale serve para tratar o problema referente as acentuções não permitidas
     setlocale(LC_ALL, "Portuguese");
 
@@ -152,7 +146,7 @@ int main()
         // E quantidade para a quantidade de ingressos
         int tipo = 0, quant = 0, escolha = 0, tema = 0, cont = 0, idade = 0, valor = 0;
         bool tema1 = 0, tema2 = 0, tema3 = 0, tema4 = 0;
-        char nome[60] = "", cpf[11] = "";
+        char nome[60], cpf[11];
 
         limparTela();
         // LGDP
@@ -162,25 +156,25 @@ int main()
         wprintf(L"Ao aceitar os termos, você concorda com a coleta e uso de suas informações conforme descrito acima.\n\n");
         wprintf(L"Você pode retirar seu consentimento a qualquer momento.\n\n");
         wprintf(L"Você aceita?\n1)Sim\n2)Não\nR:");
-        scanf("%d", &escolha);
+        scanf("%1d", &escolha);
         // Se a pessoa aceitar os termos, irá seguir com a compra dos ingressos
         if (escolha == 1)
         {
             limparTela();
-            wprintf(L"---------Museu São SLA---------\n");
-            printf("         Seja bem-vindo!\n\n");
+            cabecalho();
             printf("Digite seu nome: ");
-            scanf(" %99[^\n]", &*nome);
+            scanf(" %99[^\n]", nome);
 
             limparTela();
 
             // Irá ficar repetindo até a pessoa colocar um CPF valido
             do
             {
+                cabecalho();
                 wprintf(L"Digite seu CPF sem traços ou pontuações: ");
-                scanf("%s", &*cpf);
+                scanf("%s", cpf);
                 // Chama a função verificarCPF passando o cpf escrito pela pessoa.
-                // Uma função IF sempre retornara apensa valores booleanos
+                // Uma função IF sempre retornara apenas valores booleanos
                 // Então, quando colocamos a função verificarCPF sem verificação de valores (EX: verificarCPF(cpf) == true)
                 // automaticamente irá verificar se é verdadeiro ou falso o resultado da função
 
@@ -207,10 +201,11 @@ int main()
 
             do
             {
+                cabecalho();
                 printf("Digite sua idade: ");
                 scanf("%d", &idade);
 
-                if ((idade <1) || (idade > 99))
+                if ((idade < 1) || (idade > 99))
                 {
                     wprintf(L"Idade inválida!\n");
                 }
@@ -229,21 +224,20 @@ int main()
             {
                 do
                 {
-                    printf("Escolha seu ingresso:\n");
+                    cabecalho();
+                    printf("Escolha seu ingresso:\n\n");
                     printf("1) Inteiro\n");
-                    printf("2) Meio\n");
-                    printf("3) Isento\n\n");
+                    printf("2) Meio\n\n");
                     printf("Digite o tipo de ingresso: ");
                     scanf("%d", &tipo);
-                    if (tipo != 1 && tipo != 2 && tipo != 3)
+                    if (tipo != 1 && tipo != 2)
                     {
                         limparTela();
                         wprintf(L"Opção inexistente!\n");
-                        // Faz esperar por 1 segundo
                         Sleep(1000);
                         limparTela();
                     }
-                } while (tipo != 1 && tipo != 2 && tipo != 3);
+                } while (tipo != 1 && tipo != 2);
             }
             do
             {
@@ -251,12 +245,13 @@ int main()
                 {
                     // Auto-explicativo
                     limparTela();
+                    cabecalho();
                     printf("Temas\n\n");
                     printf("1)100 anos da semana de arte moderna\n");
                     printf("2)150 anos de Santos Dumont\n");
                     wprintf(L"3)Jogos olímpicos de París 2024\n");
                     wprintf(L"4)Arte Periférica\n");
-                    wprintf(L"\nDigite qual tema você irá ver: \n");
+                    wprintf(L"\nDigite qual tema você irá ver: ");
                     scanf("%d", &tema);
                     if (tema < 1 || tema > 4)
                     {
@@ -301,47 +296,51 @@ int main()
                 }
                 if (tema1 != 1 || tema2 != 1 || tema3 != 1 || tema4 != 1)
                 {
-                    wprintf(L"\nDeseja escolhar mais outro tema?\n1)Sim\n2)Não\n");
+                    wprintf(L"\nDeseja escolhar outro tema?\n1)Sim\n2)Não\nR: ");
                     scanf("%d", &escolha);
                 }
             } while (escolha != 2);
             // Limpa a tela
             limparTela();
 
+            cabecalho();
             printf("Digite a quantidade de ingressos desejados para cada tema: ");
             scanf("%d", &quant);
 
             limparTela();
 
+            cabecalho();
             if (tipo == 1 && idade <= 60)
             {
                 wprintf(L"Você escolheu o ingresso com valor inteiro!\n");
                 valor = inteira * cont * quant;
                 printf("O total de %d ingresso(s) com valores inteiros com %d tema(s) ficou: R$%d\n", quant, cont, valor);
-                Sleep(7000);
+                Sleep(10000);
             }
             else if (tipo == 2 && idade <= 60)
             {
                 wprintf(L"Você escolheu o ingresso com meio valor!\n");
                 valor = meia * cont * quant;
                 printf("O total de %d ingresso(s) com metade do valor com %d tema(s) ficou: R$%d\n", quant, cont, valor);
-                wprintf(L"Apresente seu documento no caixa para validar seu ingresso\n");
-                Sleep(7000);
+                wprintf(L"Apresente seu documento no caixa para validar seu ingresso!\n");
+                Sleep(10000);
             }
             else
             {
                 wprintf(L"Você escolheu o ingresso isento!\n");
                 wprintf(L"Vá ao caixa e apresente seu RG para validar sua isenção!");
-                Sleep(7000);
+                Sleep(20000);
             }
 
             arquivo = fopen("registro_museu.csv", "a");
-            fprintf(arquivo, "%s;%s;%d;%d;%d;%d;%d;%d;%d;%d\n", nome, cpf, idade, tipo, tema1, tema2, tema3, tema4, quant, valor);
+            fwrite(cpf, sizeof(char), sizeof(cpf), arquivo);
+            fprintf(arquivo, ";%s;%d;%d;%d;%d;%d;%d;%d;%d\n", nome, idade, tipo, quant, valor,tema1, tema2, tema3, tema4);
             fclose(arquivo);
         }
         else
         {
             limparTela();
+            cabecalho();
             wprintf(L"Você só poderá usar o sistema caso aceitar os termos de uso.\n\n");
             printf("Obrigado por usar os sistemas da DevWorld!");
             Sleep(3500);
