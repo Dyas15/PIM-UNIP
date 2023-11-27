@@ -1,8 +1,49 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+int main() {
+    wprintf(L"                                                                \n");
+wprintf(L"                              ...                               \n");
+wprintf(L"                           ... .  ...  ....                     \n");
+wprintf(L"                         .. .  :  . ...   .           ..        \n");
+wprintf(L"                    ......   :...:.   :   :         ..  ..      \n");
+wprintf(L"                  .:.:- :  ..:   .:.. .   :         .    .      \n");
+wprintf(L"                  ..::: :    -. .-    .   .         .    .      \n");
+wprintf(L"                 ... ..: .  .  -  .  ..   .     ..  .    .      \n");
+wprintf(L"               ....   ... .    .    .:    .   ..  ...     .     \n");
+wprintf(L"              .:....  . :  ......... .    .  ..    ...    .     \n");
+wprintf(L"             .:.   .  : ..           .    .  .     . .    .     \n");
+wprintf(L"            ...    .  .  .           .    .  .     . .    .     \n");
+wprintf(L"           ...     .  ...:           .    .  :     . .    :     \n");
+wprintf(L"          . :     .:..    ..         .    .  .     : .    .     \n");
+wprintf(L"         . .      :.       ..        .    .. .     : .    :     \n");
+wprintf(L"        .. .     ..         ..       .     . .     : ..   :     \n");
+wprintf(L"       .. :      :           .        .    : .     .  .   .     \n");
+wprintf(L"       : ..     ..  .         :       .    ..:     .  :   .     \n");
+wprintf(L"      :  :      .  .          ..      .     .:     .  .   .     \n");
+wprintf(L"     .. ..      :  .           :       :     :     .  .   :     \n");
+wprintf(L"     :  .      ..  .            .       .    .     .  .   .     \n");
+wprintf(L"    .   .      .   .            .        ..  .     . ..   .     \n");
+wprintf(L"    .  .       .    .            :         ..:     . :    .     \n");
+wprintf(L"   :   .       .    :            ..          .     . .    .     \n");
+wprintf(L"  ..   .       .    .:            .          .     .:     .     \n");
+wprintf(L"  :    .       .    :.             :         .     ..    .      \n");
+wprintf(L"  .    .       .   .. :            ..        .      .    :      \n");
+wprintf(L" .     .       .   :   :            ..       .      .   :       \n");
+wprintf(L" .      .      .  .     .            ..      .      : ..        \n");
+wprintf(L" ..     .       :..     ..            ..      .     :.          \n");
+wprintf(L"  .      :      .:       ..             ..    .     .           \n");
+wprintf(L"  :       .      .        .               .....     :           \n");
+wprintf(L"  ..      ..      :        .                  ......:........   \n");
+wprintf(L"   .       .       ..      :                            .....:  \n");
+wprintf(L"    ..      :       .....  .                            :    :: \n");
+wprintf(L"      ....::..           ..:                         .   ....:. \n");
+wprintf(L"    ...      :          ..  .                         ........  \n");
+wprintf(L"  ..          :       .  ..  :                      ...    .:.  \n");
+wprintf(L" ..            .       ..  . :..                       ..  : -  \n");
+wprintf(L" .              ..  ..   . ...  ......              .. ..: ..:  \n");
+wprintf(L"                  ..  ..  . .:        .......    ..:  ::::...   \n");
+wprintf(L"                    ....:.....                ....:::.::        \n");
 
-int main(){
-    
+    system("pause");
 }

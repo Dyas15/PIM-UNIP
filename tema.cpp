@@ -111,6 +111,46 @@ void periferia()
     system("pause");
 }
 
+void olimpiadas()
+{
+    limparTela();
+    pergunta(L"");
+    printf("                  .:!!::::!!:                        ::!::::!!:.                       .:!!::::!::                     \n");
+    printf("               :!             .!:                .!.             ::                 !:             .!.                 \n");
+    printf("             .!.                  ::            ::                  .!.           .:.                  ::              \n");
+    printf("            :.                      :.        .:                      .:         :.                      :.            \n");
+    printf("           :                         .:      .:                         :       :                         :.           \n");
+    printf("          :.                          :.    .:                          .!     !.                          !.          \n");
+    printf("          :                            :    :                            :.   .:                            :          \n");
+    printf("         ..                            :    :                            ..   ..                            :          \n");
+    printf("         ..                         :::!....!:!:.                     .:!!:...::!!:                         :          \n");
+    printf("          :                      !:    :    :.   .!.               .!.   :.   .:    :!                      :          \n");
+    printf("          :.                  .!      :.    .:      ::           .:     .:     !.     .!.                  !.           \n");
+    printf("          :.                :.      :.      .:      .!         :      .:       :.      .:                :.           \n");
+    printf("           ::              :.      :.        .:       :       :      .:         ::      .!              !.             \n");
+    printf("             ::           :.     !:            .!     .:     !.    .!             !.     ..           !.               \n");
+    printf("               .!.        :  .:!.                .::.  :    .:  .!:                 :!.   :       .::                  \n");
+    printf("                   .::::::!:.                        .::!:::::.                         .:!!:::::.                     \n");
+    printf("                          :                            :.   .:                            :                            \n");
+    printf("                          :.                           !     !                            :                            \n");
+    printf("                          .:                          :.     .:                          !.                            \n");
+    printf("                           .:                        ::       ::                        :.                             \n");
+    printf("                             :.                     :.         .!                     .:                               \n");
+    printf("                              .!.                .!.             .!                 .!                                 \n");
+    printf("                                 .!:          .!:                   :!.          :!:                                  \n");
+    printf("                                      .::::..                           ..::::.                                       \n");
+
+    Sleep(1000);
+    limparTela();
+    pergunta(L"Tema relacionado a 3\n"); // informações importadas do arquivo txt para esse tema
+    system("pause");
+}
+
+void arte()
+{
+    
+}
+
 int procurarCSV(char *pesquisa, int *temas)
 {
     FILE *arquivo = fopen("registro_museu.csv", "r");
@@ -217,9 +257,7 @@ int main()
 
         if (temas[2] == 1)
         { // utilizado para valização dos ingressos 1 verdadeiro 0 falso
-            limparTela();
-            pergunta(L"Tema relacionado a 3\n"); // informações importadas do arquivo txt para esse tema
-            system("pause");
+            olimpiadas();
         }
 
         if (temas[3] == 1)
